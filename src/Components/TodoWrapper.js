@@ -1,63 +1,81 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Todo } from "./Todo";
 import { TodoForm } from "./TodoForm";
-import { v4 as uuidv4 } from "uuid";
 import { EditTodoForm } from "./EditTodoForm";
+import Header from "./Header";
+import Card from "./Card";
+import { TodoContext } from "../Context/TodoContext";
 
 export const TodoWrapper = () => {
-  const [todos, setTodos] = useState([]);
+  // const [todos, setTodos] = useState([]);
+  const { state } = useContext(TodoContext);
 
-  const addTodo = (todo) => {
-    setTodos([
-      ...todos,
-      { id: uuidv4(), task: todo, completed: false, isEditing: false },
-    ]);
-  }
+  // const addTodo = (todo) => {
+  //   setTodos((prevTodos) => [
+  //     ...prevTodos,
+  //     {
+  //       id: uuidv4(),
+  //       task: todo.task,
+  //       completed: todo.completed,
+  //       isEditing: todo.isEditing,
+  //     },
+  //   ]);
+  // };
 
-  const deleteTodo = (id) => setTodos(todos.filter((todo) => todo.id !== id));
+  // const editTodo = (todoId) => {
+  //   setTodos((prevTodos) =>
+  //     prevTodos.map((todo) =>
+  //       todo.id === todoId ? { ...todo, isEditing: !todo.isEditing } : todo
+  //     )
+  //   );
+  // };
 
-  const toggleComplete = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
-  }
+  // const editTask = (todoId, task) => {
+  //   setTodos((prevTodos) =>
+  //     prevTodos.map((todo) =>
+  //       todo.id === todoId
+  //         ? { ...todo, task: task, isEditing: !todo.isEditing }
+  //         : todo
+  //     )
+  //   );
+  // };
 
-  const editTodo = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
-      )
-    );
-  }
+  // const toggleComplete = (todoId) => {
+  //   setTodos((prevTodos) =>
+  //     prevTodos.map((todo) =>
+  //       todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
+  //     )
+  //   );
+  // };
 
-  const editTask = (task, id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo
-      )
-    );
-  };
+  // const deleteTodo = (todoId) => {
+  //   setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== todoId));
+  // };
+
+  console.log("state", state);
 
   return (
-    <div className="TodoWrapper">
-      <h1>Get Things Done !</h1>
-      <TodoForm addTodo={addTodo} />
+    <Card className="TodoWrapper">
+      <Header />
+      {/* <TodoForm addTodo={addTodo} /> */}
+      <TodoForm />
       {/* display todos */}
-      {todos.map((todo) =>
+      {state.todos.map((todo) =>
+        // if editing then edit todo form can be seen
         todo.isEditing ? (
-          <EditTodoForm editTodo={editTask} task={todo} />
+          // <EditTodoForm key={todo.id} task={todo} editTodo={editTask} />
+          <EditTodoForm key={todo.id} task={todo} />
         ) : (
-          <Todo
-            key={todo.id}
-            task={todo}
-            deleteTodo={deleteTodo}
-            editTodo={editTodo}
-            toggleComplete={toggleComplete}
-          />
+          // <Todo
+          //   key={todo.id}
+          //   task={todo}
+          //   deleteTodo={deleteTodo}
+          //   editTodo={editTodo}
+          //   toggleComplete={toggleComplete}
+          // />
+          <Todo key={todo.id} task={todo} />
         )
       )}
-    </div>
+    </Card>
   );
 };

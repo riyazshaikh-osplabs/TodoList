@@ -42,7 +42,7 @@ h1 {
   padding: 0.5rem 1rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
-  width: 300px;
+  width: 500px;
   color: #fff;
 }
 
@@ -54,9 +54,9 @@ h1 {
   background: #8758ff;
   color: #fff;
   border: none;
-  padding: 0.55rem;
+  padding: 0.56rem;
   cursor: pointer;
-  
+
 }
 
 .Todo {
@@ -79,4 +79,3 @@ h1 {
   color: #c5aeff;
   text-decoration: line-through;
 }
- 

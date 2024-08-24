@@ -1,11 +1,15 @@
 import "./App.css";
+import Card from "./Components/Card";
 import { TodoWrapper } from "./Components/TodoWrapper";
+import { TodoProvider } from "./Context/TodoContext";
 
 function App() {
   return (
-    <div className="App">
-      <TodoWrapper />
-    </div>
+    <TodoProvider>
+      <Card className="App">
+        <TodoWrapper />
+      </Card>
+    </TodoProvider>
   );
 }
 
