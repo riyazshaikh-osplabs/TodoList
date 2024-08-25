@@ -5,10 +5,12 @@ import { EditTodoForm } from "./EditTodoForm";
 import Header from "./Header";
 import Card from "./Card";
 import { TodoContext } from "../Context/TodoContext";
+import { useStore } from "../Store";
 
 export const TodoWrapper = () => {
   // const [todos, setTodos] = useState([]);
-  const { state } = useContext(TodoContext);
+  // const { state } = useContext(TodoContext);
+  const state = useStore()[0];
 
   // const addTodo = (todo) => {
   //   setTodos((prevTodos) => [

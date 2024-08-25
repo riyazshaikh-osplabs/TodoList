@@ -1,22 +1,31 @@
 import { useContext, useState } from "react";
 import { TodoContext } from "../Context/TodoContext";
 import { ADD_TODO } from "../Store/Actions/TodoAction";
+import { useStore } from "../Store";
 
 export const TodoForm = () => {
-  const { dispatch } = useContext(TodoContext);
+  // const { dispatch } = useContext(TodoContext);
+  const dispatch = useStore()[1];
   const [input, setInput] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // addTodo({ task: input, completed: false, isEditing: false });
-    dispatch({
-      type: ADD_TODO,
+    dispatch("ADD_TODO", {
       payload: {
         task: input,
         completed: false,
         isEditing: false,
       },
     });
+    // dispatch({
+    //   ADD_TODO,
+    //   payload: {
+    //     task: input,
+    //     completed: false,
+    //     isEditing: false,
+    //   },
+    // });
     setInput("");
   };
 

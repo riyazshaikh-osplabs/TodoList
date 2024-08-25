@@ -9,8 +9,10 @@ import {
   EDIT_TODO,
   TOGGLE_TODO,
 } from "../Store/Actions/TodoAction";
+import { useStore } from "../Store";
 export const Todo = ({ task }) => {
-  const { dispatch } = useContext(TodoContext);
+  // const { dispatch } = useContext(TodoContext);
+  const dispatch = useStore(false)[1];
 
   return (
     <Card className="Todo">
@@ -22,9 +24,7 @@ export const Todo = ({ task }) => {
       </p> */}
       <p
         className={task.completed ? "completed" : ""}
-        onClick={() =>
-          dispatch({ type: TOGGLE_TODO, payload: { id: task.id } })
-        }
+        onClick={() => dispatch("TOGGLE_TODO", { payload: { id: task.id } })}
       >
         {task.task}
       </p>
@@ -33,17 +33,13 @@ export const Todo = ({ task }) => {
           style={{ margin: "5px" }}
           icon={faPenToSquare}
           // onClick={() => editTodo(task.id)}
-          onClick={() =>
-            dispatch({ type: EDIT_TODO, payload: { id: task.id } })
-          }
+          onClick={() => dispatch("EDIT_TODO", { payload: { id: task.id } })}
         />
         <FontAwesomeIcon
           style={{ margin: "5px" }}
           icon={faTrash}
           // onClick={() => deleteTodo(task.id)}
-          onClick={() =>
-            dispatch({ type: DELETE_TODO, payload: { id: task.id } })
-          }
+          onClick={() => dispatch("DELETE_TODO", { payload: { id: task.id } })}
         />
       </Card>
     </Card>
